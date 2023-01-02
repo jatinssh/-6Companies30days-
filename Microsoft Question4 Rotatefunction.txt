@@ -1,0 +1,33 @@
+class Solution {
+    public int maxRotateFunction(int[] nums) {
+        if(nums == null || nums.length == 0){
+            return 0;
+        }
+        int n = nums.length ;
+        int sum = 0;
+        for(int a: nums){
+            sum+= a;
+        }
+        int [] f = new int [n];
+        f[0] = evaluate (nums);
+    
+    long maxF = f[0];
+    for(int i = 1 ; i <nums.length ; i++)
+    {
+        f[i] = f[i - 1] - sum + nums [i- 1] * n;
+        if (f[i] > maxF)
+        {
+            maxF = f[i];
+        }
+    }
+    return (int) maxF;
+}
+private int evaluate (int []nums){
+    int result = 0 ;
+    for(int i = 0; i <nums.length ; i++)
+    {
+        result += i * nums[i];
+    }
+    return result ;
+}
+}
